@@ -83,20 +83,22 @@ export function AppSidebar() {
       <SidebarContent className="p-2">
         {navigation.map((section) => (
           <SidebarGroup key={section.title}>
-            {!collapsed && (
-              <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                {section.title}
-              </SidebarGroupLabel>
-            )}
+            <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              {collapsed ? section.title.charAt(0) : section.title}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {section.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <NavLink to={item.url} className={getNavCls}>
-                        <item.icon className="w-4 h-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </NavLink>
+                       <NavLink 
+                         to={item.url} 
+                         className={getNavCls}
+                         title={collapsed ? item.title : undefined}
+                       >
+                         <item.icon className="w-4 h-4" />
+                         {!collapsed && <span>{item.title}</span>}
+                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
